@@ -53,6 +53,7 @@ const fragment =`
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 100000 );
+  camera.position.z = 5;
 
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize( window.innerWidth, window.innerHeight );
@@ -137,7 +138,29 @@ const fragment =`
       cube3.position.set(0, 0, -50);
 			scene.add( cube3 );
 
-			camera.position.z = 5;
+
+
+
+      // sphere 1 ///
+      const geometry2 = new THREE.IcosahedronGeometry(1, 32, 8);
+      const material4 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			const sphere1 = new THREE.Mesh( geometry2, material4 );
+      sphere1.position.set(50, 25, -50);
+			scene.add( sphere1 );
+
+      // sphere 2 ///
+
+      const material5 = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+			const sphere2 = new THREE.Mesh( geometry2, material5 );
+      sphere2.position.set(-50, 25, -50);
+			scene.add( sphere2 );
+
+      // sphere 3 //
+      const material6 = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+			const sphere3 = new THREE.Mesh( geometry2, material6 );
+      sphere3.position.set(0, 25, 50);
+			scene.add( sphere3 );
+
 
 
   // desk
@@ -196,6 +219,7 @@ const fragment =`
             let tweenRotation = new TWEEN.Tween(rotationStart).to(rotationEnd, 2000)
             tweenRotation.easing(TWEEN.Easing.Linear.None)
             tweenRotation.start()
+            controls.update();
             // camera.lookAt(desk);
           };
       //       controls.target.set(coords.x, coords.y, coords.z -10 );
