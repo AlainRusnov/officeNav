@@ -47,6 +47,7 @@ const fragment =`
 
 
   //////////////////////////////////////////////////////////
+  // Scene build //
 
 
 
@@ -155,43 +156,6 @@ const fragment =`
   let raycaster = new THREE.Raycaster();
   let mouse = new THREE.Vector3();
 
-    // window.addEventListener('click', (event) => {
-    //   event.preventDefault()
-    //   // Get the mouse position
-    //   mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-    //   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
-    //   raycaster.setFromCamera(mouse, camera)
-
-    //   var intersects = raycaster.intersectObjects(scene.children)
-    //   for (var i=0; i<intersects.length; i++) {
-
-    //     // Move the camera towards the object and stay 1000 above it on z axis
-    //     var positionX = intersects[i].point.x
-    //     var positionY = intersects[i].point.y
-    //     var positionZ = (intersects[i].point.z) + 1000
-
-    //     var positionStart = camera.position
-    //     var positionEnd = { x : positionX, y: positionY, z: positionZ }
-    //     var tweenPosition = new TWEEN.Tween(positionStart).to(positionEnd, 2000)
-    //     tweenPosition.easing(TWEEN.Easing.Linear.None)
-    //     tweenPosition.start()
-
-    //     // Make the camera look at the object
-    //     var rotationX = intersects[i].point.x
-    //     var rotationY = intersects[i].point.y
-    //     var rotationZ = intersects[i].point.z
-
-    //     var rotationStart = controls.target
-    //     var rotationEnd = { x : rotationX, y: rotationY, z: rotationZ }
-    //     var tweenRotation = new TWEEN.Tween(rotationStart).to(rotationEnd, 2000)
-    //     tweenRotation.easing(TWEEN.Easing.Linear.None)
-    //     tweenRotation.start()
-
-    //   }
-    // });
-
-
       window.addEventListener( 'mousemove', onMouseMove );
 
       function onMouseMove( event ) {
@@ -232,7 +196,7 @@ const fragment =`
             let tweenRotation = new TWEEN.Tween(rotationStart).to(rotationEnd, 2000)
             tweenRotation.easing(TWEEN.Easing.Linear.None)
             tweenRotation.start()
-            camera.lookAt(desk);
+            // camera.lookAt(desk);
           };
       //       controls.target.set(coords.x, coords.y, coords.z -10 );
       //       // camera.position.x = coords.x;
