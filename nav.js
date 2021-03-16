@@ -174,6 +174,98 @@ const fragment =`
     scene.add(gltf.scene);
   });
 
+
+  // video cam //
+
+  video = document.getElementById( 'video' );
+
+				const texture = new THREE.VideoTexture( video );
+
+				const projGeo = new THREE.PlaneGeometry( 16, 9 );
+				projGeo.scale( 1, 1, 1 );
+				const projMat = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
+        const proj = new THREE.Mesh( projGeo, projMat );
+					proj.position.set( 50, 10, 10);
+					proj.lookAt( camera.position );
+					scene.add( proj );
+
+
+
+        const proj2 = new THREE.Mesh( projGeo, projMat );
+					proj2.position.set( -50, 10, 10);
+					proj2.lookAt( camera.position );
+					scene.add( proj2 );
+
+
+
+        const proj3 = new THREE.Mesh( projGeo, projMat );
+					proj3.position.set( 10, 10, -50);
+					proj3.lookAt( camera.position );
+					scene.add( proj3 );
+
+
+
+        const proj4 = new THREE.Mesh( projGeo, projMat );
+					proj4.position.set( -50, 10, -50);
+					proj4.lookAt( camera.position );
+					scene.add( proj4 );
+
+          if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
+
+            const constraints = { video: { width: 1280, height: 720, facingMode: 'user' } };
+
+            navigator.mediaDevices.getUserMedia( constraints ).then( function ( stream ) {
+
+              // apply the stream to the video element used in the texture
+
+              video.srcObject = stream;
+              video.play();
+
+            } ).catch( function ( error ) {
+
+              console.error( 'Unable to access the camera/webcam.', error );
+
+            } );
+
+          } else {
+
+            console.error( 'MediaDevices interface not available.' );
+
+          }
+
+  // Projection scene /////
+  // screenScene = new THREE.Scene();
+
+	// screenCamera = new THREE.OrthographicCamera(
+	// 	window.innerWidth  / -2, window.innerWidth  /  2,
+	// 	window.innerHeight /  2, window.innerHeight / -2,
+	// 	-10000, 10000 );
+	// screenCamera.position.z = 1;
+	// screenScene.add( screenCamera );
+
+	// var screenGeometry = new THREE.PlaneGeometry( window.innerWidth, window.innerHeight );
+
+	// firstRenderTarget = renderer.setRenderTarget( 512, 512, { format: THREE.RGBFormat } );
+	// var screenMaterial = new THREE.MeshBasicMaterial( { map: firstRenderTarget } );
+
+	// var quad = new THREE.Mesh( screenGeometry, screenMaterial );
+	// // quad.rotation.x = Math.PI / 2;
+	// screenScene.add( quad );
+
+	// // final version of camera texture, used in scene.
+	// var planeGeometry = new THREE.BoxGeometry( 400, 200, 1, 1 );
+	// finalRenderTarget = renderer.setRenderTarget( 512, 512, { format: THREE.RGBFormat } );
+	// var planeMaterial = new THREE.MeshBasicMaterial( { map: finalRenderTarget } );
+	// var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+	// plane.position.set(0,10,-50);
+	// scene.add(plane);
+	// // pseudo-border for plane, to make it easier to see
+	// var planeGeometry = new THREE.BoxGeometry( 420, 220, 1, 1 );
+	// var planeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+	// var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+	// plane.position.set(0,100,-502);
+	// scene.add(plane);
+
   // Tween ///
 
   let raycaster = new THREE.Raycaster();
@@ -256,6 +348,9 @@ const fragment =`
         TWEEN.update();
 
         controls.update();
+
+        // renderer.render( screenScene, screenCamera, finalRenderTarget, true );
+
         renderer.render( scene, camera );
       };
 
